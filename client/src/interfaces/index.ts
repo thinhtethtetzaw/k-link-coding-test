@@ -1,12 +1,9 @@
 export interface ITextFieldProps {
   label: string;
-  name: string;
   placeholder: string;
-  type: "text" | "placeholder";
-  register?: {
-    email: string;
-    password: string;
-  };
+  type: "text" | "placeholder" | "email" | "password" | "submit";
+  register?: any;
+  errors: any;
 }
 
 export interface IButtonProps {
