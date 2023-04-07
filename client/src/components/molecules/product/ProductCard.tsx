@@ -10,7 +10,7 @@ const ProductCard = ({ id, name, img, price, category }: IProductProps) => {
       (item: IProductProps) => item.id === product.id
     );
     if (!sameIndex) {
-      setCart([...cart, { ...product, qty: 0 }]);
+      setCart([...cart, { ...product, qty: 1 }]);
     } else {
       return product;
     }

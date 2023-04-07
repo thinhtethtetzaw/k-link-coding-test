@@ -10,14 +10,14 @@ const OrderSection = () => {
   const setOrderDetailVisibility = useSetRecoilState(showOrderDetailState);
   const products = useRecoilValue(cartState);
 
-  function handleClose() {
+  const handleClose = () => {
     setOrderDetailVisibility(false);
-  }
+  };
 
   return (
     <div className="h-[73vh] p-8 px-5">
       <div className="flex items-start justify-between">
-        <h5 className="mb-5 text-2xl font-semibold">Order Details</h5>
+        <h5 className="mb-10 mt-2 text-2xl font-semibold">Order Details</h5>
         <button
           className="mt-2 cursor-pointer text-sm text-gray-500 hover:underline lg:hidden"
           onClick={handleClose}
@@ -44,7 +44,7 @@ const OrderSection = () => {
         ) : (
           <div className="flex h-[60vh] flex-col items-center justify-center gap-5">
             <div className="text-center text-gray-400">
-              <h5 className="text-2xl">Your cart is empty !</h5>
+              <h5 className="text-2xl">Your cart is empty!</h5>
               <p className="mt-3 text-sm">
                 Looks like you have not added anything to cart.
               </p>

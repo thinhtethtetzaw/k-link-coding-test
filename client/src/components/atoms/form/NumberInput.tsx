@@ -1,26 +1,35 @@
-import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { cartState } from "@/recoil/state";
-import { INumberInputProps } from "@/interfaces";
+import { INumberInputProps, ICartProductProps } from "@/interfaces";
 import { Minus, Plus } from "@/assets/icons";
 
 const NumberInput = ({ count, productId }: INumberInputProps) => {
   const setCart = useSetRecoilState(cartState);
-  const [value, setValue] = useState(0);
+
+  const handleCart = (value: number) => {
+    setCart((prev: ICartProductProps[]) => {
+      return prev.map((product: ICartProductProps) => {
+        if (product.id === productId) {
+          return { ...product, qty: value };
+        }
+        return product;
+      });
+    });
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(+e.target.value);
+    handleCart(+e.target.value);
   };
 
   const handleIncrease = () => {
-    setValue(value + 1);
+    handleCart(++count);
   };
 
   const handleDecrease = () => {
-    if (value <= 0) {
-      setValue(0);
+    if (count <= 1) {
+      handleCart(1);
     } else {
-      setValue(value - 1);
+      handleCart(--count);
     }
   };
 
@@ -33,9 +42,9 @@ const NumberInput = ({ count, productId }: INumberInputProps) => {
         <Minus />
       </button>
       <input
-        type="number"
+        type="string"
         className="no-arrow p-2 py-1 text-center text-gray-500 outline-none focus:ring-0 xl:py-1.5"
-        value={value}
+        value={count}
         onChange={handleInputChange}
       />
       <button

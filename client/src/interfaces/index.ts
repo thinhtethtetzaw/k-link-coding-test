@@ -6,11 +6,6 @@ export interface ITextFieldProps {
   errors: any;
 }
 
-export interface INumberInputProps {
-  count: number;
-  productId: number;
-}
-
 export interface IButtonProps {
   text: string;
   type: "button" | "submit";
@@ -30,4 +25,8 @@ export interface IProductProps {
 
 export interface ICartProductProps extends IProductProps {
   qty: number;
+}
+export interface INumberInputProps {
+  count: number;
+  productId: number;
 }

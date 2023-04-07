@@ -4,14 +4,7 @@ import { Close } from "@/assets/icons";
 import { ICartProductProps } from "@/interfaces";
 import NumberInput from "../../atoms/form/NumberInput";
 
-const OrderCard = ({
-  id,
-  name,
-  img,
-  price,
-  qty,
-  category,
-}: ICartProductProps) => {
+const OrderCard = ({ id, name, img, price, qty }: ICartProductProps) => {
   const setCart = useSetRecoilState(cartState);
 
   const handleRemoveFromCart = () => {
@@ -31,7 +24,7 @@ const OrderCard = ({
           <NumberInput count={qty} productId={id} />
           <p className="font-semibold text-blue-650">
             <span className="mr-1 text-xs">Ks</span>
-            {price.toLocaleString()}
+            {(price * qty).toLocaleString()}
           </p>
         </div>
       </div>
