@@ -1,12 +1,12 @@
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { cartState } from "@/recoil/state";
-import { orderDetailState } from "@/recoil/state";
+import { showOrderDetailState } from "@/recoil/state";
 import ProductList from "@/components/organisms/home/ProductLists";
 import OrderDetails from "@/components/organisms/home/OrderDetails";
 import { Cart } from "@/assets/icons";
 
 const Home = () => {
-  const setOrderDetailVisibility = useSetRecoilState(orderDetailState);
+  const setOrderDetailVisibility = useSetRecoilState(showOrderDetailState);
   const cartQty = useRecoilValue(cartState);
 
   function handleOpenCart() {

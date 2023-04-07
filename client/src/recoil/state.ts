@@ -1,8 +1,8 @@
 import { atom } from "recoil";
 import { ICartProductProps } from "@/interfaces";
 
-export const orderDetailState = atom({
-  key: "orderDetailState",
+export const showOrderDetailState = atom({
+  key: "showOrderDetailState",
   default: false,
 });
 

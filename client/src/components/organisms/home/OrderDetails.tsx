@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
-import { orderDetailState } from "@/recoil/state";
+import { showOrderDetailState } from "@/recoil/state";
 import OrderSection from "@/components/molecules/order/OrderSection";
 import TotalSection from "@/components/molecules/order/TotalSection";
 
 const OrderDetails = () => {
-  const isOrderDetailVisible = useRecoilValue(orderDetailState);
+  const isOrderDetailVisible = useRecoilValue(showOrderDetailState);
   return (
     <>
       <div className="hidden h-screen w-[40%] border-l border-gray-300 lg:block xl:w-1/4">
