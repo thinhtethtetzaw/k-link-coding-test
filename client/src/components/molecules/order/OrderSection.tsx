@@ -16,7 +16,7 @@ const OrderSection = () => {
 
   return (
     <div className="h-[73vh] p-8 px-5">
-      <div className="flex items-start justify-between">
+      <div className="flex items-center justify-between">
         <h5 className="mb-10 mt-2 text-2xl font-semibold">Order Details</h5>
         <button
           className="mt-2 cursor-pointer text-sm text-gray-500 hover:underline lg:hidden"
@@ -33,10 +33,10 @@ const OrderSection = () => {
                 <OrderCard
                   id={product.id}
                   name={product.name}
-                  img={product.img}
+                  image={product.image}
                   price={product.price}
                   qty={product.qty}
-                  category={product.category}
+                  categories={product.categories}
                 />
               </Fragment>
             ))}

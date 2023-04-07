@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { cartState } from "@/recoil/state";
 import { IProductProps } from "@/interfaces";
 
-const ProductCard = ({ id, name, img, price, category }: IProductProps) => {
+const ProductCard = ({ id, name, image, price, categories }: IProductProps) => {
   const [cart, setCart] = useRecoilState(cartState);
 
   const addToCart = (product: IProductProps) => {
@@ -19,17 +19,27 @@ const ProductCard = ({ id, name, img, price, category }: IProductProps) => {
   return (
     <div
       className="flex cursor-pointer flex-col space-y-3 rounded-xl bg-white p-3 shadow-card"
-      onClick={() => addToCart({ id, name, img, price, category })}
+      onClick={() => addToCart({ id, name, image, price, categories })}
     >
       <div className="relative">
         <img
           className="h-[200px] w-full rounded-xl object-cover"
-          src={img}
+          src={image}
           alt={name}
         />
-        <span className="absolute bottom-3 left-3 rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
-          {category.name}
-        </span>
+        <div className="absolute bottom-3 left-3 flex gap-2">
+          {categories.map((c, index) =>
+            index < categories.length - 1 ? (
+              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
+                {c.name}
+              </span>
+            ) : (
+              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
+                {c.name}
+              </span>
+            )
+          )}
+        </div>
       </div>
       <h5 className="text-smx line-clamp-3">{name}</h5>
       <p className="text-xl font-bold text-blue-650">

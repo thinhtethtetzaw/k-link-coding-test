@@ -15,17 +15,23 @@ export interface IButtonProps {
 export interface IProductProps {
   id: number;
   name: string;
-  img: string;
+  image: string;
   price: number;
-  category: {
+  categories: {
     id: number;
     name: string;
-  };
+  }[];
 }
 
 export interface ICartProductProps extends IProductProps {
   qty: number;
 }
+
+export interface ILoginUserProps {
+  email: string;
+  password: string;
+}
+
 export interface INumberInputProps {
   count: number;
   productId: number;
