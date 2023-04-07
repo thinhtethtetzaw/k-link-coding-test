@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "@/pages/Home";
+import Login from "@/pages/Login";
+
+import { RecoilRoot } from "recoil";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+]);
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <RecoilRoot>
+        <RouterProvider router={router} />
+      </RecoilRoot>
     </div>
   );
 }
