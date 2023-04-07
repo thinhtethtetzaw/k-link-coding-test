@@ -7,3 +7,13 @@
     @apply font-inter;
   }
 }
+
+.no-arrow::-webkit-outer-spin-button,
+.no-arrow::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-arrow[type="number"] {
+  -moz-appearance: textfield;
+}
