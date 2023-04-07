@@ -11,3 +11,18 @@ export interface IButtonProps {
   type: "button" | "submit";
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
+
+export interface IProductProps {
+  id: number;
+  name: string;
+  img: string;
+  price: number;
+  category: {
+    id: number;
+    name: string;
+  };
+}
+
+export interface ICartProductProps extends IProductProps {
+  qty: number;
+}
