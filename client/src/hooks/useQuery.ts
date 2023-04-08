@@ -8,7 +8,7 @@ const config = {
     "Content-Type": "application/json",
     Authorization:
       "Bearer " +
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJiZXJyeWJlYmVAZ21haWwuY29tIiwiaWF0IjoxNjgwODk2Mzk3LCJleHAiOjE2ODA5ODI3OTd9.knMeoteeiR-m3mo6KTUd3lpz7pkS0Oab_PyVbiKnkhQ",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJiZXJyeWJlYmVAZ21haWwuY29tIiwiaWF0IjoxNjgwODk0NzIwLCJleHAiOjE2ODA5ODExMjB9.ZBxlih1Pv1z9PxOYPT1o7NuO1xAS9PqcR75sbVKgObU",
   },
 };
 
