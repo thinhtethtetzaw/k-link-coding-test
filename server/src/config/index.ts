@@ -2,11 +2,11 @@ import dbConfig from "./db.config";
 import { Sequelize } from "sequelize";
 
 const db = new Sequelize(
-  dbConfig.MYSQL_DATABASE,
-  dbConfig.MYSQL_USER,
-  dbConfig.MYSQL_PASSWORD,
+  dbConfig.MYSQLDATABASE,
+  dbConfig.MYSQLUSER,
+  dbConfig.MYSQLPASSWORD,
   {
-    host: dbConfig.MYSQL_HOST,
+    host: dbConfig.MYSQLHOST,
     dialect: dbConfig.dialect,
     logging: false,
 
