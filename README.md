@@ -32,8 +32,9 @@ you@your-Pc-name:~$ cd <k-link-coding-test>
 
 ```sh
     cd - server
-
+    
     - copy env.example as .env
+    - create database (k_link)
     - npm install
     - npm run dev
 ```
