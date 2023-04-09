@@ -19,7 +19,7 @@ const categoriesFetcher = async (req: Request, res: Response) => {
         return res.status(404).json({
           meta: {
             status: 404,
-            success: true,
+            success: false,
             message: "No categories found",
           },
           body: categories,

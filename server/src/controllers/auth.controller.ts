@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import Model from "../models";
 import jwt from "jsonwebtoken";
-import { jwtSecret, jwtExpiration } from "../middlewares/auth.middleware";
+import { JWT_SECRET, JWT_EXPIRATION } from "../middlewares/auth.middleware";
 
 const User = Model.User;
 
@@ -63,7 +63,7 @@ const usersFetcher = async (req: Request, res: Response) => {
         return res.status(404).json({
           meta: {
             status: 404,
-            success: true,
+            success: false,
             message: "No users found",
           },
           body: users,
@@ -85,7 +85,9 @@ export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ message: "no email or password" });
+    return res
+      .status(400)
+      .json({ status: 400, success: false, message: "No email or password" });
   }
 
   try {
@@ -96,25 +98,31 @@ export const login = async (req: Request, res: Response) => {
     });
 
     if (!user) {
-      return res.status(400).json({ message: "Invalid email" });
+      return res
+        .status(400)
+        .json({ status: 400, success: false, message: "Invalid email" });
     }
 
     var passwordIsValid = bcrypt.compareSync(password, user.password);
 
     if (!passwordIsValid) {
-      return res.status(401).send({
-        accessToken: null,
+      return res.status(401).json({
+        status: 401,
+        success: false,
         message: "Invalid Password!",
       });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, jwtSecret, {
-      expiresIn: jwtExpiration,
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRATION,
     });
 
-    return res.status(200).send({ message: "Query is success", token });
+    return res.status(200).json({
+      meta: { status: 200, success: true, message: "Query is success" },
+      body: { token },
+    });
   } catch (error) {
-    return res.status(500).send({ message: "Query is fail", error });
+    return res.status(500).json({ message: "Query is fail", error });
   }
 };
 

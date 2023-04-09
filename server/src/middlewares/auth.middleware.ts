@@ -1,9 +1,9 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 
-export const jwtSecret =
+export const JWT_SECRET =
   "dd1466449febb5b12e7710fb2655c97bd3f744e44671ef0c1713f0e9899f77a1f687bcb3f6a935c8ac7487d440918ac66fb8e25280cff4b9da5581a24de0bfc7";
-export const jwtExpiration = "24h";
+export const JWT_EXPIRATION = "24h";
 
 // // Middleware to check for JWT in Authorization header
 const authMiddleware = (
@@ -22,7 +22,7 @@ const authMiddleware = (
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, jwtSecret) as { email: string };
+    const decoded = jwt.verify(token, JWT_SECRET) as { email: string };
     req.body.email = decoded.email;
     next();
   } catch (err) {
