@@ -20,7 +20,7 @@ const productCreator = async (req: Request, res: Response) => {
             where: { name: category.toLowerCase() },
           });
 
-          if (categoryRow) {
+          if (!!categoryRow) {
             createdProduct
               .addCategory(categoryRow, { through: { selfGranted: false } })
               .catch((err: Error) => {
@@ -113,7 +113,7 @@ const productsFetcher = async (req: Request, res: Response) => {
   Product.findAll({
     where: {
       name: !!searchString
-        ? { [Op.like]: `%${searchString}%` }
+        ? { [Op.like]: `%${searchString.toString().toLowerCase()}%` }
         : { [Op.like]: "%" },
     },
     include: include,

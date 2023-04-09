@@ -6,6 +6,7 @@ import { protectedRoutes, guestRoutes } from "./routes";
 import sequelizeConnection from "./config";
 
 import authMiddleware from "./middlewares/auth.middleware";
+import seed from "./seed";
 
 dotenv.config();
 
@@ -33,8 +34,9 @@ const get = () => {
 
   sequelizeConnection
     .sync({ force: true })
-    .then(() => {
+    .then(async () => {
       console.log(cyanBright("Database successfully connected!"));
+      await seed();
     })
     .catch((err) => {
       console.log("Error", err);
