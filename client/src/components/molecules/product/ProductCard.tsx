@@ -28,13 +28,19 @@ const ProductCard = ({ id, name, image, price, categories }: IProductProps) => {
           src={image}
           alt={name}
         />
-        <span className="absolute bottom-3 left-3 rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
+        <div className="absolute bottom-3 left-3 flex gap-2">
           {categories.map((c, index) =>
-            index < categories.length - 1
-              ? `${sentenceCase(c.name)},`
-              : ` ${sentenceCase(c.name)}`
+            index < categories.length - 1 ? (
+              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
+                {sentenceCase(c.name)}
+              </span>
+            ) : (
+              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
+                {sentenceCase(c.name)}
+              </span>
+            )
           )}
-        </span>
+        </div>
       </div>
       <h5 className="text-smx line-clamp-3">{name}</h5>
       <p className="text-xl font-bold text-blue-650">
