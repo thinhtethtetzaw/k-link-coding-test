@@ -3,9 +3,7 @@ import { useRecoilValue } from "recoil";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { loginState } from "@/recoil/state";
 
-// const NODE_SERVER = "http://localhost:8081/api/v1";
-const NODE_SERVER =
-  "https://k-link-coding-test-production.up.railway.app/api/v1";
+const NODE_SERVER = "http://localhost:8081/api/v1";
 
 const config = {
   headers: {
