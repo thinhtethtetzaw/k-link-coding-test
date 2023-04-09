@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
-import { cartState } from "@/recoil/state";
+import { sentenceCase } from "change-case";
 import { IProductProps } from "@/interfaces";
+import { cartState } from "@/recoil/state";
 
 const ProductCard = ({ id, name, image, price, categories }: IProductProps) => {
   const [cart, setCart] = useRecoilState(cartState);
@@ -27,19 +28,13 @@ const ProductCard = ({ id, name, image, price, categories }: IProductProps) => {
           src={image}
           alt={name}
         />
-        <div className="absolute bottom-3 left-3 flex gap-2">
+        <span className="absolute bottom-3 left-3 rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
           {categories.map((c, index) =>
-            index < categories.length - 1 ? (
-              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
-                {c.name}
-              </span>
-            ) : (
-              <span className=" rounded-md bg-white px-2 py-1 text-xs text-gray-500 shadow-lg">
-                {c.name}
-              </span>
-            )
+            index < categories.length - 1
+              ? `${sentenceCase(c.name)},`
+              : ` ${sentenceCase(c.name)}`
           )}
-        </div>
+        </span>
       </div>
       <h5 className="text-smx line-clamp-3">{name}</h5>
       <p className="text-xl font-bold text-blue-650">

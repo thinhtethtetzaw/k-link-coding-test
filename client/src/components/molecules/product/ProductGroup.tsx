@@ -1,7 +1,7 @@
 import { Fragment } from "react";
-import { useFetchQuery } from "@/hooks/useQuery";
 import { useRecoilValue } from "recoil";
 import { productsFilterState } from "@/recoil/state";
+import { useFetchQuery } from "@/hooks/useQuery";
 import ProductCard from "@/components/molecules/product/ProductCard";
 
 const ProductGroup = () => {

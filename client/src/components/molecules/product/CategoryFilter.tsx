@@ -1,5 +1,6 @@
 import { useFetchQuery } from "@/hooks/useQuery";
 import { useRecoilState } from "recoil";
+import { sentenceCase } from "change-case";
 import { productsFilterState } from "@/recoil/state";
 import { IFilterState, ICategoryProps } from "@/interfaces";
 
@@ -42,7 +43,7 @@ const CategoryFilter = () => {
               } cursor-pointer whitespace-nowrap rounded-full px-3 py-1 text-sm`}
               onClick={() => handleClick(category.id.toString())}
             >
-              {category.name}
+              {sentenceCase(category.name)}
             </div>
           ))}
       </div>
