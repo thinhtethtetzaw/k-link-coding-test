@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import Model from "../models";
 import jwt from "jsonwebtoken";
-import { JWT_SECRET, JWT_EXPIRATION } from "../middlewares/auth.middleware";
+import { JWT_SECRET } from "../middlewares/auth.middleware";
 
 const User = Model.User;
 
@@ -113,9 +113,7 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, {
-      expiresIn: JWT_EXPIRATION,
-    });
+    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET);
 
     return res.status(200).json({
       meta: { status: 200, success: true, message: "Query is success" },

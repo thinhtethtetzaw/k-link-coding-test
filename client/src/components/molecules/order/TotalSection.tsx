@@ -1,14 +1,18 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { cartState } from "@/recoil/state";
 import Button from "@/components/atoms/form/Button";
 
 const TotalSection = () => {
-  const products = useRecoilValue(cartState);
+  const [products, setProducts] = useRecoilState(cartState);
 
   const subTotal = products.reduce(
     (total, product) => total + product.qty * product.price,
     0
   );
+
+  const handlePayNow = () => {
+    setProducts([]);
+  };
   return (
     <div className="flex h-[27vh] flex-col justify-between bg-blue-450 p-5 py-3">
       <div className="flex items-center justify-between">
@@ -24,11 +28,7 @@ const TotalSection = () => {
         <p className="text-gray-600">Total</p>
         <p className="text-blue-650">Ks {subTotal + subTotal * 0.05}</p>
       </div>
-      <Button
-        type="button"
-        text="Pay Now"
-        handleClick={() => console.log(products)}
-      />
+      <Button type="button" text="Pay Now" handleClick={handlePayNow} />
     </div>
   );
 };

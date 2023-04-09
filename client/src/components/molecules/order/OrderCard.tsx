@@ -35,7 +35,7 @@ const OrderCard = ({
           <NumberInput count={qty} productId={id} />
           <p className="font-semibold text-blue-650">
             <span className="mr-1 text-xs">Ks</span>
-            {price.toLocaleString()}
+            {(price * qty).toLocaleString()}
           </p>
         </div>
       </div>
