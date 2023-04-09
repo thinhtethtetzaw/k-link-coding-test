@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
+import { useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router";
+import { loginState } from "@/recoil/state";
 import { useMutationQuery } from "@/hooks/useQuery";
 import Button from "@/components/atoms/form/Button";
 import TextField from "@/components/atoms/form/TextField";
-import { ILoginUserProps } from "@/interfaces";
-
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -22,6 +21,8 @@ const schema = yup.object().shape({
 });
 
 const Form = () => {
+  const navigate = useNavigate();
+  const setLoginState = useSetRecoilState(loginState);
   const mutation = useMutationQuery(`/auth/login`);
 
   const {
@@ -33,10 +34,19 @@ const Form = () => {
   });
 
   const onSubmit = async (data: any) => {
-    mutation.mutate(data);
-    if (mutation.isSuccess) {
-      console.log("Success");
-    }
+    mutation.mutate(data, {
+      onSuccess: (res) => {
+        setLoginState((prev) => {
+          return {
+            ...prev,
+            isLoggedIn: true,
+            token: res.body.token,
+          };
+        });
+        localStorage.setItem("token", res.body.token);
+        navigate("/");
+      },
+    });
   };
 
   return (

@@ -1,12 +1,11 @@
 import { atom } from "recoil";
 import { ICartProductProps, IFilterState } from "@/interfaces";
 
-export const userState = atom({
-  key: "userState",
+export const loginState = atom({
+  key: "loginState",
   default: {
     isLoggedIn: false,
-    email: "",
-    name: "",
+    token: "",
   },
 });
 

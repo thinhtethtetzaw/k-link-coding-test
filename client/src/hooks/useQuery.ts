@@ -17,7 +17,7 @@ const useFetchQuery = (endpoint: string) => {
     queryKey: [endpoint],
     queryFn: () =>
       axios.get(`${NODE_SERVER}${endpoint}`, config).then((res) => res.data),
-    retry: 0,
+    retry: false,
   });
 };
 
