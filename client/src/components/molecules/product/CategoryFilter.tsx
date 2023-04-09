@@ -1,30 +1,50 @@
-import { useState } from "react";
+import { useFetchQuery } from "@/hooks/useQuery";
+import { useRecoilState } from "recoil";
+import { productsFilterState } from "@/recoil/state";
+import { IFilterState, ICategoryProps } from "@/interfaces";
 
 const CategoryFilter = () => {
-  const [selectedCategory, setSelectedCategory] = useState<number | string>(
-    "All"
-  );
+  const [filterState, setFilterState] = useRecoilState(productsFilterState);
 
-  const handleClick = (categoryId: number | string) => {
-    setSelectedCategory(categoryId);
+  const { isLoading, data: categories } = useFetchQuery(`/categories`);
+
+  const handleClick = (categoryId: string) => {
+    setFilterState((prev: IFilterState) => {
+      return {
+        ...prev,
+        categoryId: categoryId,
+      };
+    });
   };
 
   return (
     <div className="ml-8 pb-8">
       <div className="flex gap-2.5 overflow-x-scroll scrollbar-hide">
-        {["All", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num, index) => (
-          <div
-            key={index}
-            className={`${
-              selectedCategory === num
-                ? "bg-blue-650 text-white"
-                : "bg-gray-100 text-gray-700 "
-            } cursor-pointer whitespace-nowrap rounded-full px-3 py-1 text-sm`}
-            onClick={() => handleClick(num)}
-          >
-            Category {num}
-          </div>
-        ))}
+        <div
+          className={`${
+            filterState.categoryId === ""
+              ? "bg-blue-650 text-white"
+              : "bg-gray-100 text-gray-700 "
+          } cursor-pointer whitespace-nowrap rounded-full px-3 py-1 text-sm`}
+          onClick={() => handleClick("")}
+        >
+          All
+        </div>
+        {!isLoading &&
+          categories &&
+          categories.body.map((category: ICategoryProps, index: number) => (
+            <div
+              key={index}
+              className={`${
+                filterState.categoryId === category.id.toString()
+                  ? "bg-blue-650 text-white"
+                  : "bg-gray-100 text-gray-700 "
+              } cursor-pointer whitespace-nowrap rounded-full px-3 py-1 text-sm`}
+              onClick={() => handleClick(category.id.toString())}
+            >
+              {category.name}
+            </div>
+          ))}
       </div>
     </div>
   );

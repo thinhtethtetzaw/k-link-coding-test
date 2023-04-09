@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form";
+import { useMutationQuery } from "@/hooks/useQuery";
 import Button from "@/components/atoms/form/Button";
 import TextField from "@/components/atoms/form/TextField";
+import { ILoginUserProps } from "@/interfaces";
+
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,6 +22,8 @@ const schema = yup.object().shape({
 });
 
 const Form = () => {
+  const mutation = useMutationQuery(`/auth/login`);
+
   const {
     register,
     handleSubmit,
@@ -24,7 +31,13 @@ const Form = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: any) => console.log(data);
+
+  const onSubmit = async (data: any) => {
+    mutation.mutate(data);
+    if (mutation.isSuccess) {
+      console.log("Success");
+    }
+  };
 
   return (
     <div className="flex w-full items-center justify-center py-10 lg:w-1/2 lg:py-0">

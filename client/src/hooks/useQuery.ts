@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 const NODE_SERVER = "http://localhost:8081/api/v1";
 
@@ -12,12 +12,22 @@ const config = {
   },
 };
 
-const useFetchQuery = (url: string) => {
+const useFetchQuery = (endpoint: string) => {
   return useQuery({
-    queryKey: [url],
+    queryKey: [endpoint],
     queryFn: () =>
-      axios.get(`${NODE_SERVER}${url}`, config).then((res) => res.data),
+      axios.get(`${NODE_SERVER}${endpoint}`, config).then((res) => res.data),
+    retry: 0,
   });
 };
 
-export { useFetchQuery };
+const useMutationQuery = (endpoint: string) => {
+  return useMutation({
+    mutationFn: (body) =>
+      axios
+        .post(`${NODE_SERVER}${endpoint}`, body, config)
+        .then((res) => res.data),
+  });
+};
+
+export { useFetchQuery, useMutationQuery };

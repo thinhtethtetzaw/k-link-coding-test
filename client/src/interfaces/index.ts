@@ -12,15 +12,17 @@ export interface IButtonProps {
   handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+export interface ICategoryProps {
+  id: number;
+  name: string;
+}
+
 export interface IProductProps {
   id: number;
   name: string;
   image: string;
   price: number;
-  categories: {
-    id: number;
-    name: string;
-  }[];
+  categories: ICategoryProps[];
 }
 
 export interface ICartProductProps extends IProductProps {
@@ -35,4 +37,9 @@ export interface ILoginUserProps {
 export interface INumberInputProps {
   count: number;
   productId: number;
+}
+
+export interface IFilterState {
+  searchString: string;
+  categoryId: string;
 }

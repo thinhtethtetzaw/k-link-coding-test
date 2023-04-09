@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { ICartProductProps } from "@/interfaces";
+import { ICartProductProps, IFilterState } from "@/interfaces";
 
 export const userState = atom({
   key: "userState",
@@ -18,4 +18,12 @@ export const showOrderDetailState = atom({
 export const cartState = atom<ICartProductProps[]>({
   key: "cartState",
   default: [],
+});
+
+export const productsFilterState = atom<IFilterState>({
+  key: "productsFilterState",
+  default: {
+    searchString: "",
+    categoryId: "",
+  },
 });
