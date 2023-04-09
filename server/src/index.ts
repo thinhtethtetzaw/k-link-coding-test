@@ -25,7 +25,7 @@ const get = () => {
 
   app.get("/", async (req: Request, res: Response) => {
     res.status(200).send({
-      message: `Welcome to the Backend API! Endpoints available at http://localhost:${process.env.NODE_LOCAL_PORT}/api/v1`,
+      message: `Welcome to the Backend API! Endpoints available at http://localhost:${process.env.MYSQL_PORT}/api/v1`,
     });
   });
 
@@ -52,10 +52,11 @@ export const start = () => {
   const app = get();
 
   try {
-    app.listen(process.env.NODE_LOCAL_PORT, () => {
+    // app.listen(process.env.NODE_LOCAL_PORT, () => {
+    app.listen(process.env.MYSQL_PORT, () => {
       console.log(
         cyanBright(
-          `⚡️[server]: Server is running at http://localhost:${process.env.NODE_LOCAL_PORT}`
+          `⚡️[server]: Server is running at http://localhost:${process.env.MYSQL_PORT}`
         )
       );
     });

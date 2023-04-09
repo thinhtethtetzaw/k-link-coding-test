@@ -4,10 +4,12 @@ import { Dialect } from "sequelize";
 dotenv.config();
 
 export default {
-  MYSQL_HOST: process.env.MYSQL_HOST as string,
-  MYSQL_USER: process.env.MYSQL_USER as string,
-  MYSQL_PASSWORD: process.env.MYSQL_PASSWORD as string,
-  MYSQL_DATABASE: process.env.MYSQL_DATABASE as string,
+  MYSQL_URL: process.env.MYSQL_URL as string,
+  MYSQLPORT: process.env.MYSQLPORT as string,
+  MYSQLHOST: process.env.MYSQLHOST as string,
+  MYSQLUSER: process.env.MYSQLUSER as string,
+  MYSQLPASSWORD: process.env.MYSQLPASSWORD as string,
+  MYSQLDATABASE: process.env.MYSQLDATABASE as string,
   dialect: "mysql" as Dialect,
   pool: {
     max: 5,
