@@ -14,9 +14,14 @@ const authMiddleware = (
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res
-      .status(401)
-      .json({ message: "Authorization header is required" });
+    return res.status(401).json({
+      meta: {
+        status: 401,
+        success: false,
+        message: "Authorization header is required",
+      },
+      body: null,
+    });
   }
 
   const token = authHeader.split(" ")[1];
@@ -26,7 +31,14 @@ const authMiddleware = (
     req.body.email = decoded.email;
     next();
   } catch (err) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    return res.status(401).json({
+      meta: {
+        status: 401,
+        success: false,
+        message: "Invalid or expired token",
+      },
+      body: null,
+    });
   }
 };
 

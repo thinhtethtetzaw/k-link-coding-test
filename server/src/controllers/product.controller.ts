@@ -87,36 +87,34 @@ const productCreator = async (req: Request, res: Response) => {
 const productsFetcher = async (req: Request, res: Response) => {
   const { searchString, categoryId } = req.query;
 
-  let include =
-    categoryId !== undefined
-      ? [
-          {
-            model: Category,
-            where: { id: Number(categoryId) },
-            as: "categories",
-            attributes: ["id", "name"],
-            through: {
-              attributes: [],
-            },
+  let include = !!categoryId
+    ? [
+        {
+          model: Category,
+          where: { id: Number(categoryId) },
+          as: "categories",
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
           },
-        ]
-      : [
-          {
-            model: Category,
-            as: "categories",
-            attributes: ["id", "name"],
-            through: {
-              attributes: [],
-            },
+        },
+      ]
+    : [
+        {
+          model: Category,
+          as: "categories",
+          attributes: ["id", "name"],
+          through: {
+            attributes: [],
           },
-        ];
+        },
+      ];
 
   Product.findAll({
     where: {
-      name:
-        searchString !== undefined
-          ? { [Op.eq]: searchString }
-          : { [Op.like]: "%" },
+      name: !!searchString
+        ? { [Op.like]: `%${searchString}%` }
+        : { [Op.like]: "%" },
     },
     include: include,
   })
